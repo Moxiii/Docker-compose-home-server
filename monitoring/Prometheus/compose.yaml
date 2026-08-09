@@ -1,0 +1,15 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - prometheus-data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - monitoring-internal
+networks:
+  monitoring-internal:
+    external: true
+volumes:
+  prometheus-data:
