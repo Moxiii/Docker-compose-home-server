@@ -34,10 +34,14 @@ sudo apt install -y \
 sudo systemctl enable --now docker
 ```
 
+### !!!!! le script install.sh n'est pas tester !!!!!
+
 ## Creation de network :
 
 - proxy
 - dev
 - monitoring-internal
 
-# Creation de install.sh asap
+### Finalisation de sécurité
+
+ne pas oublier d'enlever la connection par mdp et installer Fail2Ban pour plus de securité
