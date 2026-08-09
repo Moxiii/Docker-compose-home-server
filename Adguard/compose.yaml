@@ -1,0 +1,31 @@
+services:
+  adguard:
+    image: adguard/adguardhome:latest
+    container_name: adguard
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Brussels
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adguard.rule=Host(`adguard.web.fr`)"
+      - "traefik.http.routers.adguard.entrypoints=websecure"
+      - "traefik.http.routers.adguard.tls=true"
+      - "traefik.http.services.adguard.loadbalancer.server.port=80"
+      - "traefik.docker.network=proxy"
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp
+
+    volumes:
+      - ./data:/opt/adguardhome/work
+      - ./config:/opt/adguardhome/conf
+    networks:
+      - proxy
+      - adguard-internal
+
+networks:
+  proxy:
+    external: true
+  adguard-internal:
+    driver: bridge
