@@ -1,0 +1,23 @@
+services:
+  homarr:
+    container_name: homarr
+    image: ghcr.io/homarr/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - homarr-data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homarr.rule=Host(`homarr.web.fr`)"
+      - "traefik.http.routers.homarr.entrypoints=websecure"
+      - "traefik.http.routers.homarr.tls=true"
+      - "traefik.http.services.homarr.loadbalancer.server.port=7575"
+      - "traefik.docker.network=proxy"
+    environment:
+      - SECRET_ENCRYPTION_KEY=${SECRET_ENCRYPTION_KEY}
+  proxy:
+    external: true
+volumes:
+  homarr-data:

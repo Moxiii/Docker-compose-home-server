@@ -4,9 +4,11 @@ services:
     container_name: uptime-kuma
     restart: unless-stopped
     volumes:
-      - ./data:/app/data
+      - uptime-kuma-data:/app/data
+
     networks:
       - proxy
+
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.uptime-kuma.rule=Host(`uptime.web.fr`)"
@@ -14,6 +16,10 @@ services:
       - "traefik.http.routers.uptime-kuma.tls=true"
       - "traefik.http.services.uptime-kuma.loadbalancer.server.port=3001"
       - "traefik.docker.network=proxy"
+
+volumes:
+  uptime-kuma-data:
+
 networks:
   proxy:
     external: true

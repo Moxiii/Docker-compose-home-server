@@ -3,8 +3,10 @@ services:
     image: adguard/adguardhome:latest
     container_name: adguard
     restart: unless-stopped
+
     environment:
       TZ: Europe/Brussels
+
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.adguard.rule=Host(`adguard.web.fr`)"
@@ -18,14 +20,19 @@ services:
       - 67:67/udp
 
     volumes:
-      - ./data:/opt/adguardhome/work
-      - ./config:/opt/adguardhome/conf
+      - adguard-work:/opt/adguardhome/work
+      - adguard-conf:/opt/adguardhome/conf
+
     networks:
       - proxy
       - adguard-internal
+
+volumes:
+  adguard-work:
+  adguard-conf:
 
 networks:
   proxy:
     external: true
   adguard-internal:
-    driver: bridge
+    external: false
