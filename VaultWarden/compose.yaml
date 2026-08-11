@@ -12,8 +12,15 @@ services:
 
     environment:
       SIGNUPS_ALLOWED: "false"
-      INVITATIONS_ALLOWED: "false"
+      INVITATIONS_ALLOWED: "true"
       DOMAIN: "https://vault.web.fr"
+      SMTP_HOST: "smtp.gmail.com"
+      SMTP_PORT: "587"
+      SMTP_SECURITY: "starttls"
+      SMTP_USERNAME: "${SMTP_USERNAME}"
+      SMTP_PASSWORD: "${SMTP_PASSWORD}"
+      SMTP_FROM: "${SMTP_USERNAME}"
+      SMTP_FROM_NAME: "Vaultwarden"
 
     labels:
       - "traefik.enable=true"
