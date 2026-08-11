@@ -6,7 +6,7 @@ services:
 
     environment:
       TZ: Europe/Paris
-      PASSWORD: "CHANGEME"
+      PASSWORD: ${CODE_SERVER_PASSWORD}
 
     volumes:
       - ./projects:/home/coder/projects

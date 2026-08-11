@@ -20,8 +20,8 @@ services:
     environment:
       - POSTGRES_HOST=nextcloud-db
       - POSTGRES_DB=nextcloud
-      - POSTGRES_USER=nextcloud
-      - POSTGRES_PASSWORD=CHANGE_ME
+      - POSTGRES_USER=${NEXTCLOUD_POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${NEXTCLOUD_POSTGRES_PASSWORD}
 
   nextcloud-db:
     image: postgres:17
@@ -29,8 +29,8 @@ services:
     restart: unless-stopped
     environment:
       - POSTGRES_DB=nextcloud
-      - POSTGRES_USER=nextcloud
-      - POSTGRES_PASSWORD=CHANGE_ME
+      - POSTGRES_USER=${NEXTCLOUD_POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${NEXTCLOUD_POSTGRES_PASSWORD}
 
     volumes:
       - nextcloud-db-data:/var/lib/postgresql/data
