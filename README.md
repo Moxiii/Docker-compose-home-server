@@ -1,6 +1,8 @@
-# AVANT TOUT :
+# Install:
 
-installation de docker :
+run install.sh for setup ufw / install docker / add user to docker group / update / install wireguard (soon setup too)
+
+## Manual install of docker
 
 ```
 sudo apt update
@@ -32,16 +34,10 @@ sudo apt install -y \
   docker-compose-plugin
 
 sudo systemctl enable --now docker
+
+sudo usermod -aG docker "$USER"
 ```
 
-### !!!!! le script install.sh n'est pas tester !!!!!
+### Finalizing security
 
-## Creation de network :
-
-- proxy
-- dev
-- monitoring-internal
-
-### Finalisation de sécurité
-
-ne pas oublier d'enlever la connection par mdp et installer Fail2Ban pour plus de securité
+Don't forget to disable password-based SSH authentication and install Fail2Ban for more security.
